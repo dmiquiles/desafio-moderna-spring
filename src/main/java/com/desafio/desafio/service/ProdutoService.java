@@ -20,6 +20,7 @@ import lombok.AllArgsConstructor;
 public class ProdutoService {
 
     private ProdutoRepository produtoRepository;
+    private final String text = "Registro não encontrado com o id: ";
 
     public List<Produto> listar() {
         return produtoRepository.findAll();
@@ -28,7 +29,7 @@ public class ProdutoService {
     public Produto listarPorId(@NotNull @Positive Long id) {
         return produtoRepository.findById(id)
         .map(produto -> produto)
-        .orElseThrow(() -> new RecordNotFoundException(id));
+        .orElseThrow(() -> new RecordNotFoundException(text + id));
     }
 
     public Produto criar(@Valid Produto produto){
@@ -49,12 +50,12 @@ public class ProdutoService {
 
             return produtoRepository.save(p);
         })
-        .orElseThrow(() -> new RecordNotFoundException(id));
+        .orElseThrow(() -> new RecordNotFoundException(text + id));
     }
 
     public void deletar(@NotNull @Positive Long id) {
         produtoRepository.delete(
-            produtoRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id))
+            produtoRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(text + id))
         );
     }
     

@@ -1,5 +1,7 @@
 package com.desafio.desafio.service;
 
+import java.util.List;
+
 import org.springframework.stereotype.Service;
 import org.springframework.validation.annotation.Validated;
 
@@ -17,42 +19,13 @@ public class PedidoService {
 
     private PedidoRepository pedidoRepository;
 
-    // public List<Produto> listar() {
-    //     return produtoRepository.findAll();
-    // }
-
-    // public Produto listarPorId(@NotNull @Positive Long id) {
-    //     return produtoRepository.findById(id)
-    //     .map(produto -> produto)
-    //     .orElseThrow(() -> new RecordNotFoundException(id));
-    // }
+    public List<Pedido> listar() {
+        return pedidoRepository.findAll();
+    }
 
     @Transactional
     public Pedido criar(@Valid Pedido pedido){
         return pedidoRepository.save(pedido);
     }
-
-
-    // public Produto atualizar(@NotNull @Positive Long id, @Valid Produto produto) {
-    //     return produtoRepository.findById(id)
-    //     .map( p -> {
-
-    //         p.setNome(produto.getNome());
-    //         p.setPreco(produto.getPreco());
-    //         p.setDescricao(produto.getDescricao());
-    //         p.setCor(produto.getCor());
-
-    //         p.setCategoria(produto.getCategoria());
-
-    //         return produtoRepository.save(p);
-    //     })
-    //     .orElseThrow(() -> new RecordNotFoundException(id));
-    // }
-
-    // public void deletar(@NotNull @Positive Long id) {
-    //     produtoRepository.delete(
-    //         produtoRepository.findById(id).orElseThrow(() -> new RecordNotFoundException(id))
-    //     );
-    // }
     
 }

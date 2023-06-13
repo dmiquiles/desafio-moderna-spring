@@ -18,7 +18,6 @@ import com.desafio.desafio.service.ClienteService;
 
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.NotNull;
-import jakarta.validation.constraints.Positive;
 import lombok.AllArgsConstructor;
 
 @RestController
@@ -33,9 +32,9 @@ public class ClienteController {
         return clienteService.listar();
     }
 
-    @GetMapping("/{id}")
-    public ClienteDTO listarPorId(@PathVariable @NotNull @Positive Long id) {
-        return clienteService.listarPorId(id);
+    @GetMapping("/{documento}")
+    public ClienteDTO listarPorId(@PathVariable @NotNull String documento) {
+        return clienteService.listarPorId(documento);
     }
 
     @PostMapping
@@ -44,13 +43,13 @@ public class ClienteController {
         return clienteService.criar(client);
     }
 
-    @PutMapping("/{id}")
-    public ClienteDTO update(@PathVariable @NotNull @Positive Long id, @RequestBody @Valid ClienteDTO body) {
-        return clienteService.atualizar(id, body);
+    @PutMapping("/{documento}")
+    public ClienteDTO update(@PathVariable @NotNull String documento, @RequestBody @Valid ClienteDTO body) {
+        return clienteService.atualizar(documento, body);
     }
     
-    @DeleteMapping("/{id}")
-    public void delete(@PathVariable @NotNull @Positive Long id) {
-        clienteService.deletar(id);
+    @DeleteMapping("/{documento}")
+    public void delete(@PathVariable @NotNull String documento) {
+        clienteService.deletar(documento);
     }
 }
